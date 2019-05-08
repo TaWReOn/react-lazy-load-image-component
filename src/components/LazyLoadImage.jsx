@@ -27,17 +27,21 @@ class LazyLoadImage extends React.Component {
   }
 
   getImg() {
-    const { afterLoad, beforeLoad, delayMethod, delayTime, effect,
+    const {
+      afterLoad, beforeLoad, delayMethod, delayTime, effect,
       placeholder, placeholderSrc, scrollPosition, threshold,
-      visibleByDefault, wrapperClassName, ...imgProps } = this.props;
+      visibleByDefault, wrapperClassName, ...imgProps
+    } = this.props;
 
     return <img onLoad={this.onImageLoad()} {...imgProps} />;
   }
 
   getLazyLoadImage(image) {
-    const { beforeLoad, className, delayMethod, delayTime,
+    const {
+      beforeLoad, className, delayMethod, delayTime,
       height, placeholder, scrollPosition, style, threshold,
-      visibleByDefault, width } = this.props;
+      visibleByDefault, width,
+    } = this.props;
 
     return (
       <LazyLoadComponent
@@ -58,8 +62,10 @@ class LazyLoadImage extends React.Component {
   }
 
   getWrappedLazyLoadImage(lazyLoadImage) {
-    const { effect, height, placeholderSrc,
-      width, wrapperClassName } = this.props;
+    const {
+      effect, height, placeholderSrc,
+      width, wrapperClassName,
+    } = this.props;
     const { loaded } = this.state;
 
     const loadedClassName = loaded ?
@@ -69,7 +75,7 @@ class LazyLoadImage extends React.Component {
     return (
       <span
         className={wrapperClassName + ' lazy-load-image-background ' +
-          effect + loadedClassName}
+        effect + loadedClassName}
         style={{
           backgroundImage: loaded ? '' : 'url( ' + placeholderSrc + ')',
           backgroundSize: loaded ? '' : '100% 100%',
@@ -88,8 +94,7 @@ class LazyLoadImage extends React.Component {
     const { loaded } = this.state;
 
     const image = this.getImg();
-    const lazyLoadImage = loaded ?
-      image : this.getLazyLoadImage(image);
+    const lazyLoadImage = this.getLazyLoadImage(image);
 
     if ((!effect && !placeholderSrc) || visibleByDefault) {
       return lazyLoadImage;
